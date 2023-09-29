@@ -1,0 +1,20 @@
+* {
+  box-sizing: border-box;
+}
+
+.header {
+  border: 2px solid grey;
+  padding: 2rem;
+}
+
+.userContainer {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+}
+
+.profileImg {
+  width: 100px;
+  height: 100px;
+  border: 2px solid grey;
+}
