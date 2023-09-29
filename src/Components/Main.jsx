@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useLoaderData, useSearchParams } from "react-router-dom";
 import "../App.css";
 
 import Paginate from "./Paginate";
@@ -14,12 +14,29 @@ export async function loader() {
 
 export default function Main() {
   const articles = useLoaderData();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(6);
+
+  const searchFilter = searchParams.get("search");
+
+  function handleChange(event) {
+    const { name, value } = event.target;
+    setSearchParams({ [name]: value });
+  }
 
   const lastIndex = currentPage * articlesPerPage;
   const firstIndex = lastIndex - articlesPerPage;
   const currentArticles = articles?.slice(firstIndex, lastIndex);
+
+  const filteredArticles =
+    searchFilter !== null
+      ? currentArticles.filter((article) =>
+          article.title.includes(searchFilter.toLowerCase())
+        )
+      : currentArticles;
+
+  console.log(searchFilter);
 
   function paginate(pageNo) {
     setCurrentPage(pageNo);
@@ -41,11 +58,16 @@ export default function Main() {
     <main className="main">
       <div className="searchFild">
         <form>
-          <input type="search" name="search" placeholder="search channers" />
+          <input
+            type="search"
+            name="search"
+            placeholder="search channers"
+            onChange={handleChange}
+          />
         </form>
       </div>
       <section className="articleContainer">
-        {currentArticles?.map((article, index) => (
+        {filteredArticles?.map((article, index) => (
           <article key={index} className="article">
             <img
               src={article.urlToImage}
