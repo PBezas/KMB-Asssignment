@@ -52,6 +52,16 @@
   max-width: 250px;
   max-height: 200px;
 }
+.paginationContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+}
+
+.arrowBtn {
+  cursor: pointer;
+}
 
 .pagination {
   display: flex;
@@ -59,6 +69,7 @@
   align-items: center;
   gap: 0.5rem;
   list-style: none;
+  padding: 0;
 }
 
 .pageNumber {
@@ -69,6 +80,5 @@
   width: 1.5rem;
   height: 1.5rem;
   font-size: 0.8rem;
-  cursor: pointer
-  ;
+  cursor: pointer;
 }

@@ -25,6 +25,18 @@ export default function Main() {
     setCurrentPage(pageNo);
   }
 
+  function prevPage() {
+    if (currentPage !== 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+  }
+
+  function nextPage() {
+    if (currentPage !== Math.ceil(articles?.length / articlesPerPage)) {
+      setCurrentPage((prev) => prev + 1);
+    }
+  }
+
   return (
     <main className="main">
       <div className="searchFild">
@@ -52,6 +64,8 @@ export default function Main() {
           articlesPerPage={articlesPerPage}
           totalArticles={articles?.length}
           paginate={paginate}
+          prevPage={prevPage}
+          nextPage={nextPage}
         />
       </div>
     </main>
