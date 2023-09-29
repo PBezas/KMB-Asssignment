@@ -20,7 +20,21 @@ export default function Main() {
           <input type="search" name="search" placeholder="search channers" />
         </form>
       </div>
-      <section className="articlesContainer"></section>
+      <section className="articleContainer">
+        {articles.map((article) => (
+          <article key={article.source.id} className="article">
+            <img
+              src={article.urlToImage}
+              alt="article img"
+              className="articleImg"
+            />
+            <div className="articleBody">
+              <h3>{article.title}</h3>
+              <p>{article.content}</p>
+            </div>
+          </article>
+        ))}
+      </section>
       <div className="paginationContainer"></div>
     </main>
   );

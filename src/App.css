@@ -18,3 +18,37 @@
   height: 100px;
   border: 2px solid grey;
 }
+.main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.searchFild {
+  margin-bottom: 2rem;
+}
+
+.articleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.article {
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  width: 30%;
+  border: 2px solid grey;
+  height: 40rem;
+}
+
+.articleImg {
+  max-width: 250px;
+  max-height: 200px;
+}
