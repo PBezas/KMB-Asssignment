@@ -1,9 +1,12 @@
+import { useState } from "react";
 import { useLoaderData } from "react-router-dom";
 import "../App.css";
 
+import Paginate from "./Paginate";
+
 export async function loader() {
   const res = await fetch(
-    "https://newsapi.org/v2/everything?q=apple&from=2023-09-28&to=2023-09-28&sortBy=popularity&apiKey=21f9133ff93f41d58ef769752661963d"
+    "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=21f9133ff93f41d58ef769752661963d"
   );
   const data = await res.json();
   return data.articles;
@@ -11,8 +14,17 @@ export async function loader() {
 
 export default function Main() {
   const articles = useLoaderData();
+  const [currentPage, setCurrentPage] = useState(1);
+  const [articlesPerPage] = useState(6);
 
-  console.log(articles);
+  const lastIndex = currentPage * articlesPerPage;
+  const firstIndex = lastIndex - articlesPerPage;
+  const currentArticles = articles?.slice(firstIndex, lastIndex);
+
+  function paginate(pageNo) {
+    setCurrentPage(pageNo);
+  }
+
   return (
     <main className="main">
       <div className="searchFild">
@@ -21,8 +33,8 @@ export default function Main() {
         </form>
       </div>
       <section className="articleContainer">
-        {articles.map((article) => (
-          <article key={article.source.id} className="article">
+        {currentArticles?.map((article, index) => (
+          <article key={index} className="article">
             <img
               src={article.urlToImage}
               alt="article img"
@@ -35,7 +47,13 @@ export default function Main() {
           </article>
         ))}
       </section>
-      <div className="paginationContainer"></div>
+      <div className="paginationContainer">
+        <Paginate
+          articlesPerPage={articlesPerPage}
+          totalArticles={articles?.length}
+          paginate={paginate}
+        />
+      </div>
     </main>
   );
 }
