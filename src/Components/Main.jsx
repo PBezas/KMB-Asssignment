@@ -22,7 +22,9 @@ export default function Main() {
 
   function handleChange(event) {
     const { name, value } = event.target;
-    setSearchParams({ [name]: value });
+    setTimeout(() => {
+      setSearchParams({ [name]: value });
+    }, 1500);
   }
 
   const lastIndex = currentPage * articlesPerPage;
