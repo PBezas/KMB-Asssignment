@@ -1,75 +1,47 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import "../App.css";
 
 import Paginate from "./Paginate";
 
-export async function loader() {
-  const res = await fetch(
-    "https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=21f9133ff93f41d58ef769752661963d"
-  );
+export async function loader({ request }) {
+  const url = new URL(request.url);
+  const page = url.searchParams.get("page");
+  const query = url.searchParams.get("q");
+
+  const dataUrl = `http://newsapi.org/v2/everything?q=${query}&apiKey=09b2a48dc89f416caada3626ec05f9eb&page=${
+    page ?? 1
+  }&pageSize=6`;
+
+  const res = await fetch(dataUrl);
   const data = await res.json();
-  return data.articles;
+  return data;
 }
 
 export default function Main() {
-  const articles = useLoaderData();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const data = useLoaderData();
+  const articles = data.articles;
+  const totalArticles = data.totalResults;
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(6);
-
-  const searchFilter = searchParams.get("search");
-
-  function handleChange(event) {
-    const { name, value } = event.target;
-    setTimeout(() => {
-      setSearchParams({ [name]: value });
-    }, 1500);
-  }
-
-  const lastIndex = currentPage * articlesPerPage;
-  const firstIndex = lastIndex - articlesPerPage;
-  const currentArticles = articles?.slice(firstIndex, lastIndex);
-
-  const filteredArticles =
-    searchFilter !== null
-      ? currentArticles.filter((article) =>
-          article.title.includes(searchFilter.toLowerCase())
-        )
-      : currentArticles;
-
-  console.log(searchFilter);
-
-  function paginate(pageNo) {
-    setCurrentPage(pageNo);
-  }
-
-  function prevPage() {
-    if (currentPage !== 1) {
-      setCurrentPage((prev) => prev - 1);
-    }
-  }
-
-  function nextPage() {
-    if (currentPage !== Math.ceil(articles?.length / articlesPerPage)) {
-      setCurrentPage((prev) => prev + 1);
-    }
-  }
+  const [searchParams, setSearchParams] = useSearchParams();
+  const totalPages = Math.ceil(totalArticles / articlesPerPage);
 
   return (
     <main className="main">
-      <div className="searchFild">
+      <div className="filters">
         <form>
-          <input
-            type="search"
-            name="search"
-            placeholder="search channers"
-            onChange={handleChange}
-          />
+          <input type="search" name="search" placeholder="search articles" />
+          <select name="category">
+            <option value="">Sort by</option>
+            <option value="oldestFirst">oldest first</option>
+            <option value="newestFirst">newest first</option>
+            <option value="groupedBySource">grouped by source</option>
+          </select>
         </form>
       </div>
       <section className="articleContainer">
-        {filteredArticles?.map((article, index) => (
+        {articles?.map((article, index) => (
           <article key={index} className="article">
             <img
               src={article.urlToImage}
@@ -84,13 +56,7 @@ export default function Main() {
         ))}
       </section>
       <div className="paginationContainer">
-        <Paginate
-          articlesPerPage={articlesPerPage}
-          totalArticles={articles?.length}
-          paginate={paginate}
-          prevPage={prevPage}
-          nextPage={nextPage}
-        />
+        <Paginate totalPages={totalPages} currentPage={currentPage} />
       </div>
     </main>
   );
