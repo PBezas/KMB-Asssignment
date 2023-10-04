@@ -1,6 +1,6 @@
 import "../App.css";
 import { users } from "../data/users.jsx";
-import { useLayoutEffect, useState } from "react";
+import { useState } from "react";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 function getInitials(name) {
@@ -9,7 +9,7 @@ function getInitials(name) {
 }
 
 export default function Header() {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
   return (
     <header className="appHeader">
       {users.map((user) => (
@@ -18,7 +18,10 @@ export default function Header() {
             <div className="greetMsgContainer">
               <span className="userInitials">{getInitials(user.name)}</span>
               <span> Hi {user.name.split(" ")[0]}</span>
-              <MdKeyboardArrowDown  className="menuArrowBtn" onClick={() => setOpen((prev) => !prev)} />
+              <MdKeyboardArrowDown
+                className="menuArrowBtn"
+                onClick={() => setOpen((prev) => !prev)}
+              />
               {open ? (
                 <ul className="userMenu">
                   <li>Settings</li> <li>Logout</li>

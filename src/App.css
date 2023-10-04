@@ -2,10 +2,6 @@
   box-sizing: border-box;
 }
 
-.appHeader {
-  border: 2px solid grey;
-}
-
 .headerContainer {
   display: flex;
   flex-direction: column;
