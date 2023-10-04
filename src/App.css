@@ -24,9 +24,10 @@
   justify-content: space-between;
   align-items: center;
   margin-top: 2rem;
+  
 }
 
-.filters form{
+.filters form {
   margin-bottom: 2rem;
   display: flex;
   justify-content: space-between;
@@ -85,4 +86,29 @@
   height: 1.5rem;
   font-size: 0.8rem;
   cursor: pointer;
+}
+
+.appFooter {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: lightslategray;
+  border-top: 2px solid rgba(119, 136, 153, 0.2);
+  font-size: 0.6rem;
+  width: 100%;
+  height: 3rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.appFooter > ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.appFooter > ul a {
+  text-decoration: none;
+  color: lightslategray;
 }
