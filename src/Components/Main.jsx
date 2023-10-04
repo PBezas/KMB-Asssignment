@@ -27,6 +27,20 @@ export default function Main() {
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
 
+  useEffect(() => {
+    setSearchParams((prevParams) => {
+      prevParams.set("page", currentPage);
+      return prevParams;
+    });
+  }, [currentPage]);
+
+  function prevPage() {
+    setCurrentPage(currentPage - 1);
+  }
+  function nextPage() {
+    setCurrentPage(currentPage + 1);
+  }
+
   return (
     <main className="main">
       <div className="filters">
@@ -56,7 +70,12 @@ export default function Main() {
         ))}
       </section>
       <div className="paginationContainer">
-        <Paginate totalPages={totalPages} currentPage={currentPage} />
+        <Paginate
+          totalPages={totalPages}
+          currentPage={currentPage}
+          prevPage={prevPage}
+          nextPage={nextPage}
+        />
       </div>
     </main>
   );
