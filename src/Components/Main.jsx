@@ -20,12 +20,16 @@ export async function loader({ request }) {
 
 export default function Main() {
   const data = useLoaderData();
-  const articles = data.articles;
+  const initialData = data.articles;
   const totalArticles = data.totalResults;
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(6);
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
+  const [searchResults, setSearchResults] = useState(initialData);
+  const query = searchParams.get("q");
+
+  // Pagination functions
 
   useEffect(() => {
     setSearchParams((prevParams) => {
@@ -41,11 +45,32 @@ export default function Main() {
     setCurrentPage(currentPage + 1);
   }
 
+  // Search functions
+
+  function handleChange(e) {
+    if (!e.target.value) {
+      setSearchParams((prevParams) => {
+        prevParams.delete("q");
+        return prevParams;
+      });
+    } else {
+      setSearchParams((prevParams) => {
+        prevParams.set("q", e.target.value);
+        return prevParams;
+      });
+    }
+  }
+
   return (
     <main className="main">
       <div className="filters">
         <form>
-          <input type="search" name="search" placeholder="search articles" />
+          <input
+            type="search"
+            name="search"
+            placeholder="search articles"
+            onChange={handleChange}
+          />
           <select name="category">
             <option value="">Sort by</option>
             <option value="oldestFirst">oldest first</option>
@@ -55,7 +80,7 @@ export default function Main() {
         </form>
       </div>
       <section className="articleContainer">
-        {articles?.map((article, index) => (
+        {initialData?.map((article, index) => (
           <article key={index} className="article">
             <img
               src={article.urlToImage}
