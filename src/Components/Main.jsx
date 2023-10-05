@@ -10,7 +10,7 @@ export async function loader({ request }) {
   const search = url.searchParams.get("qInTitle");
   const sortBy = url.searchParams.get("sortBy");
   const searchParam = search ? `&qInTitle=${search}` : ``;
-  const sortParam = sortBy ? `&ssortBy=${sortBy}` : ``;
+  const sortParam = sortBy ? `&sortBy=${sortBy}` : ``;
 
   //From the two endpoint options provided in the test pdf, I chose 'everything' endpoint, because is the only one (based on it's documentation) that provides the option of limiting the search search to only within the title of the article and had the option of sortBy in the request parameters.
 
@@ -64,7 +64,7 @@ export default function Main() {
         });
       } else {
         setSearchParams((prevParams) => {
-          prevParams.set("qInTitle", searchTerm);
+          prevParams.set("qInTitle", searchTerm.toLowerCase());
           return prevParams;
         });
       }
@@ -74,13 +74,13 @@ export default function Main() {
   }, [searchTerm]);
 
   function handleSearchChange(e) {
-    const value = e.target.value.toLowerCase();
+    const value = e.target.value;
     setSearchTerm(value);
   }
 
   // Sort functionality
 
-  //In sort by droplist I used the given options: "relevancy", "popularity", published At" because (based on documentation) I didn't have the option of filtering the data neither by "oldest first" (because from my research on internet there must be the "order" request param that didn't exist in this api) nor by "grouped by source" because it's not a option given by the documentation of the api.
+  //In sortBy droplist I used the given options: "relevancy", "popularity", "published At" because (based on documentation) I didn't have the option of filtering the data neither by "oldest first" (because from my research on internet there must be the "order" request param that didn't exist in this api) nor by "grouped by source" because it's not an option given by the documentation of the api.
 
   useEffect(() => {
     const timer = setTimeout(() => {

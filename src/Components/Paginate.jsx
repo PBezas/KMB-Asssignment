@@ -7,6 +7,7 @@ export default function Paginate({
   prevPage,
   nextPage,
 }) {
+  console.log(currentPage);
   return (
     <>
       <button
@@ -18,9 +19,13 @@ export default function Paginate({
       </button>
       <div className="pagination">
         <p className="pageNumber">{currentPage}</p>
-        of <span> {totalPages}</span>
+        of <span>{totalPages}</span>
       </div>
-      <button className="arrowBtn" onClick={nextPage} disabled={!totalPages}>
+      <button
+        className="arrowBtn"
+        onClick={nextPage}
+        disabled={currentPage >= totalPages}
+      >
         <SlArrowRight />
       </button>
     </>
