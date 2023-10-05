@@ -7,9 +7,9 @@ import Paginate from "./Paginate";
 export async function loader({ request }) {
   const url = new URL(request.url);
   const page = url.searchParams.get("page");
-  const query = url.searchParams.get("q");
+  const query = url.searchParams.get("qInTitle");
 
-  const dataUrl = `http://newsapi.org/v2/everything?q=${query}&apiKey=09b2a48dc89f416caada3626ec05f9eb&page=${
+  const dataUrl = `http://newsapi.org/v2/everything?qInTitle=${query}&apiKey=09b2a48dc89f416caada3626ec05f9eb&page=${
     page ?? 1
   }&pageSize=6`;
 
@@ -20,14 +20,12 @@ export async function loader({ request }) {
 
 export default function Main() {
   const data = useLoaderData();
-  const initialData = data.articles;
+  const articles = data.articles;
   const totalArticles = data.totalResults;
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(6);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
-  const [searchResults, setSearchResults] = useState(initialData);
-  const query = searchParams.get("q");
 
   // Pagination functions
 
@@ -47,40 +45,46 @@ export default function Main() {
 
   // Search functions
 
-  function handleChange(e) {
-    if (!e.target.value) {
+  function handleSearchChange(e) {
+    const value = e.target.value.toLowerCase();
+
+    if (!value) {
       setSearchParams((prevParams) => {
-        prevParams.delete("q");
+        
+        prevParams.delete("qInTitle");
         return prevParams;
       });
     } else {
-      setSearchParams((prevParams) => {
-        prevParams.set("q", e.target.value);
-        return prevParams;
-      });
+      setTimeout(() => {
+        setSearchParams((prevParams) => {
+        
+          prevParams.set("qInTitle", value);
+          return prevParams;
+        });
+      }, 300);
     }
   }
 
   return (
     <main className="main">
       <div className="filters">
-        <form>
+        <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="search"
             name="search"
             placeholder="search articles"
-            onChange={handleChange}
+            onChange={handleSearchChange}
           />
           <select name="category">
             <option value="">Sort by</option>
-            <option value="oldestFirst">oldest first</option>
-            <option value="newestFirst">newest first</option>
-            <option value="groupedBySource">grouped by source</option>
+            <option value="relevancy">Relevancy</option>
+            <option value="popularity">Popularity</option>
+            <option value="publishedAt">Published at</option>
           </select>
         </form>
       </div>
       <section className="articleContainer">
-        {initialData?.map((article, index) => (
+        {articles?.map((article, index) => (
           <article key={index} className="article">
             <img
               src={article.urlToImage}
