@@ -9,17 +9,14 @@ export async function loader({ request }) {
   const page = url.searchParams.get("page");
   const search = url.searchParams.get("qInTitle");
   const sortBy = url.searchParams.get("sortBy");
-  const searchParam = search ? `&qInTitle=${search}` : ``;
   const sortParam = sortBy ? `&sortBy=${sortBy}` : ``;
 
-  //From the two endpoint options provided in the test pdf, I chose 'everything' endpoint, because is the only one (based on it's documentation) that provides the option of limiting the search search to only within the title of the article and had the option of sortBy in the request parameters.
+  //From the two endpoint options provided in the test pdf, I chose 'everything' endpoint, because is the only one (based on it's documentation) that provides the option of limiting the search to only within the title of the article and had the option of sortBy in the request parameters.
 
   const dataUrl =
     `https://newsapi.org/v2/everything?apiKey=09b2a48dc89f416caada3626ec05f9eb&page=${
       page ?? 1
-    }&pageSize=6` +
-    searchParam +
-    sortParam;
+    }&pageSize=6&qInTitle=${search}` + sortParam;
 
   const res = await fetch(dataUrl);
   const data = await res.json();

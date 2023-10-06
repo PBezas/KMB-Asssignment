@@ -7,7 +7,6 @@ export default function Paginate({
   prevPage,
   nextPage,
 }) {
-  console.log(currentPage);
   return (
     <>
       <button
