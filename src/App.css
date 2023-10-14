@@ -75,8 +75,6 @@
   justify-content: flex-start;
   gap: 1.5rem;
   padding: 2rem;
-  /* background-image: url(assets/images/userBack.webp);
-  background-repeat: no-repeat; */
   color: white;
 }
 
@@ -130,8 +128,8 @@
 }
 
 .articleImg {
-  max-width: 250px;
-  max-height: 200px;
+  max-width: 100%;
+  object-fit: cover;
 }
 
 .articleBody {
