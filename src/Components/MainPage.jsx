@@ -3,6 +3,7 @@ import { useLoaderData, useSearchParams } from "react-router-dom";
 import "../App.css";
 
 import Card from "./Card";
+import NoResults from "./NoResults";
 import Paginate from "./Paginate";
 
 export async function loader({ request }) {
@@ -13,7 +14,7 @@ export async function loader({ request }) {
   const sortParam = sortBy ? `&sortBy=${sortBy}` : ``;
 
   const dataUrl =
-    `https://newsapi.org/v2/everything?apiKey=1a877f6de7b9490082dfedd79812c371&page=${
+    `https://newsapi.org/v2/everything?apiKey=21f9133ff93f41d58ef769752661963d&page=${
       page ?? 1
     }&pageSize=6&qInTitle=${search}` + sortParam;
 
@@ -28,10 +29,11 @@ export default function MainPage() {
   const totalArticles = data.totalResults;
   const [currentPage, setCurrentPage] = useState(1);
   const [articlesPerPage] = useState(6);
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
   const [searchTerm, setSearchTerm] = useState("");
   const [sortTerm, setSortTerm] = useState("");
+  const query = searchParams.get("qInTitle");
 
   // Pagination functionality
 
@@ -119,14 +121,18 @@ export default function MainPage() {
         </form>
       </div>
       <section className="articleContainer">
-        {articles?.map(({ urlToImage, title, content }, index) => (
-          <Card
-            key={index}
-            urlToImage={urlToImage}
-            title={title}
-            content={content}
-          />
-        ))}
+        {articles?.length === 0 ? (
+          <NoResults query={query} />
+        ) : (
+          articles?.map(({ urlToImage, title, content }, index) => (
+            <Card
+              key={index}
+              urlToImage={urlToImage}
+              title={title}
+              content={content}
+            />
+          ))
+        )}
       </section>
       <div className="paginationContainer">
         <Paginate

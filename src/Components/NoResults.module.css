@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 3rem;
+  font-family: "Roboto", sans-serif;
+}
+
+h5 {
+  margin-bottom: 0;
+}
+
+ul li:first-child {
+  margin-bottom: 0.7rem;
+}
