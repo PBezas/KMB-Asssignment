@@ -2,13 +2,13 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
 import RootLayout from "./Routes/RootLayout";
-import Main, { loader as mainLoader } from "./Components/Main";
+import MainPage, { loader as mainPageLoader } from "./Components/MainPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <RootLayout />,
-    children: [{ index: true, element: <Main />, loader: mainLoader }],
+    children: [{ path: "main-page", element: <MainPage />, loader: mainPageLoader }],
   },
 ]);
 const App = () => <RouterProvider router={router} />;
