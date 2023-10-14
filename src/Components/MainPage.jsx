@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLoaderData, useSearchParams } from "react-router-dom";
 import "../App.css";
 
+import Card from "./Card";
 import Paginate from "./Paginate";
 
 export async function loader({ request }) {
@@ -118,18 +119,13 @@ export default function MainPage() {
         </form>
       </div>
       <section className="articleContainer">
-        {articles?.map((article, index) => (
-          <article key={index} className="article">
-            <img
-              src={article.urlToImage}
-              alt="article img"
-              className="articleImg"
-            />
-            <div className="articleBody">
-              <h3>{article.title}</h3>
-              <p>{article.content}</p>
-            </div>
-          </article>
+        {articles?.map(({ urlToImage, title, content }, index) => (
+          <Card
+            key={index}
+            urlToImage={urlToImage}
+            title={title}
+            content={content}
+          />
         ))}
       </section>
       <div className="paginationContainer">
