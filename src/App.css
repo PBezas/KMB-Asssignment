@@ -75,8 +75,8 @@
   justify-content: flex-start;
   gap: 1.5rem;
   padding: 2rem;
-  background-image: url(assets/images/userBack.jpg);
-  background-repeat: no-repeat;
+  /* background-image: url(assets/images/userBack.webp);
+  background-repeat: no-repeat; */
   color: white;
 }
 

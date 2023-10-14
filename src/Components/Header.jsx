@@ -29,8 +29,14 @@ export default function Header() {
               ) : null}
             </div>
           </div>
-          <div className="userInfo">
-            <img src={user.img} alt={user.name} className="profileImg" />
+          <div
+            className="userInfo"
+            style={{
+              backgroundImage: `url(${user.backImg})`,
+              backgroundRepeat: "no-repeat",
+            }}
+          >
+            <img src={user.profImg} alt={user.name} className="profileImg" />
             <h2>{user.name}</h2>
           </div>
         </div>
