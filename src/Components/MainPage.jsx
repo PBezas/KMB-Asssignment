@@ -1,10 +1,17 @@
-import { useEffect, useState } from "react";
-import { useLoaderData, useSearchParams } from "react-router-dom";
+import { useEffect, useState, useRef } from "react";
+import {
+  useLoaderData,
+  useNavigation,
+  useSearchParams,
+} from "react-router-dom";
 import "../App.css";
 
 import Card from "./Card";
 import NoResults from "./NoResults";
 import Paginate from "./Paginate";
+
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -14,7 +21,7 @@ export async function loader({ request }) {
   const sortParam = sortBy ? `&sortBy=${sortBy}` : ``;
 
   const dataUrl =
-    `https://newsapi.org/v2/everything?apiKey=21f9133ff93f41d58ef769752661963d&page=${
+    `https://newsapi.org/v2/everything?apiKey=1a877f6de7b9490082dfedd79812c371&page=${
       page ?? 1
     }&pageSize=6&qInTitle=${search}` + sortParam;
 
@@ -34,6 +41,18 @@ export default function MainPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [sortTerm, setSortTerm] = useState("");
   const query = searchParams.get("qInTitle");
+  const [isLoading, setIsLoading] = useState(false);
+  const { state } = useNavigation();
+  const searchRef = useRef(false);
+
+  useEffect(() => {
+    if (searchRef.current && state === "loading") {
+      setIsLoading(true);
+    } else if (searchRef.current && state === "idle") {
+      setIsLoading(false);
+      searchRef.current = false;
+    }
+  }, [state]);
 
   // Pagination functionality
 
@@ -74,6 +93,7 @@ export default function MainPage() {
   function handleSearchChange(e) {
     const value = e.target.value;
     setSearchTerm(value);
+    searchRef.current = true;
   }
 
   // Sort functionality
@@ -91,7 +111,7 @@ export default function MainPage() {
           return prevParams;
         });
       }
-    }, 1000);
+    }, 300);
 
     return () => clearTimeout(timer);
   }, [sortTerm]);
@@ -120,20 +140,26 @@ export default function MainPage() {
           </select>
         </form>
       </div>
-      <section className="articleContainer">
-        {articles?.length === 0 ? (
-          <NoResults query={query} />
-        ) : (
-          articles?.map(({ urlToImage, title, content }, index) => (
-            <Card
-              key={index}
-              urlToImage={urlToImage}
-              title={title}
-              content={content}
-            />
-          ))
-        )}
-      </section>
+      {!isLoading ? (
+        <section className="articleContainer">
+          {articles?.length === 0 ? (
+            <NoResults query={query} />
+          ) : (
+            articles?.map(({ urlToImage, title, content }, index) => (
+              <Card
+                key={index}
+                urlToImage={urlToImage}
+                title={title}
+                content={content}
+              />
+            ))
+          )}
+        </section>
+      ) : (
+        <Box sx={{ display: "flex" }}>
+          <CircularProgress />
+        </Box>
+      )}
       <div className="paginationContainer">
         <Paginate
           totalPages={totalPages}
