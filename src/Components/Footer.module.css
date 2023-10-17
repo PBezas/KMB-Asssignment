@@ -1,0 +1,34 @@
+.appFooter {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: lightslategray;
+  border-top: 2px solid rgba(119, 136, 153, 0.2);
+  font-size: 0.6rem;
+  width: 100%;
+}
+
+.appFooter > ul {
+  list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0;
+}
+
+.appFooter > ul a {
+  text-decoration: none;
+  color: lightslategray;
+}
+
+.appFooter > ul a:hover {
+  color: darkgrey;
+}
+
+@media (min-width: 420px) {
+  .appFooter {
+    flex-direction: row;
+    justify-content: space-around;
+  }
+}

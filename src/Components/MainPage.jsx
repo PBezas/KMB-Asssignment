@@ -1,3 +1,5 @@
+import styles from "./MainPage.module.css";
+
 import { useEffect, useState, useRef } from "react";
 import {
   useLoaderData,
@@ -103,8 +105,8 @@ export default function MainPage() {
   const debounceSort = debounce(handleSort, 300);
 
   return (
-    <main className="main">
-      <div className="filters">
+    <main className={styles.main}>
+      <div className={styles.filters}>
         <form onSubmit={(e) => e.preventDefault()}>
           <input
             type="search"
@@ -121,7 +123,7 @@ export default function MainPage() {
         </form>
       </div>
       {!isLoading ? (
-        <section className="articleContainer">
+        <section className={styles.articleContainer}>
           {articles?.length === 0 ? (
             <NoResults query={query} />
           ) : (
@@ -140,7 +142,7 @@ export default function MainPage() {
           <CircularProgress />
         </Box>
       )}
-      <div className="paginationContainer">
+      <div>
         <Paginate
           totalPages={totalPages}
           currentPage={currentPage}
