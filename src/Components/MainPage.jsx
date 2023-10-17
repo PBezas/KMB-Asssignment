@@ -10,6 +10,8 @@ import Card from "./Card";
 import NoResults from "./NoResults";
 import Paginate from "./Paginate";
 
+import debounce from "lodash.debounce";
+
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 
@@ -38,8 +40,6 @@ export default function MainPage() {
   const [articlesPerPage] = useState(6);
   const [searchParams, setSearchParams] = useSearchParams();
   const totalPages = Math.ceil(totalArticles / articlesPerPage);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [sortTerm, setSortTerm] = useState("");
   const query = searchParams.get("qInTitle");
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useNavigation();
@@ -72,54 +72,42 @@ export default function MainPage() {
 
   // Search functionality
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!searchTerm) {
-        setSearchParams((prevParams) => {
-          prevParams.delete("qInTitle");
-          return prevParams;
-        });
-      } else {
-        setSearchParams((prevParams) => {
-          prevParams.set("qInTitle", searchTerm.toLowerCase());
-          return prevParams;
-        });
-      }
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [searchTerm]);
-
-  function handleSearchChange(e) {
+  function handleSearch(e) {
     const value = e.target.value;
-    setSearchTerm(value);
     searchRef.current = true;
+
+    if (!value) {
+      setSearchParams((prevParams) => {
+        prevParams.delete("qInTitle");
+        return prevParams;
+      });
+    } else {
+      setSearchParams((prevParams) => {
+        prevParams.set("qInTitle", value.toLowerCase());
+        return prevParams;
+      });
+    }
   }
+  const debounceSearch = debounce(handleSearch, 300);
 
   // Sort functionality
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      if (!sortTerm) {
-        setSearchParams((prevParams) => {
-          prevParams.delete("sortBy");
-          return prevParams;
-        });
-      } else {
-        setSearchParams((prevParams) => {
-          prevParams.set("sortBy", sortTerm);
-          return prevParams;
-        });
-      }
-    }, 300);
-
-    return () => clearTimeout(timer);
-  }, [sortTerm]);
-
-  function handleSortChange(e) {
+  function handleSort(e) {
     const value = e.target.value;
-    setSortTerm(value);
+    if (!value) {
+      setSearchParams((prevParams) => {
+        prevParams.delete("sortBy");
+        return prevParams;
+      });
+    } else {
+      setSearchParams((prevParams) => {
+        prevParams.set("sortBy", value);
+        return prevParams;
+      });
+    }
   }
+
+  const debounceSort = debounce(handleSort, 300);
 
   return (
     <main className="main">
@@ -128,11 +116,10 @@ export default function MainPage() {
           <input
             type="search"
             name="search"
-            value={searchTerm}
             placeholder="search articles"
-            onChange={handleSearchChange}
+            onChange={debounceSearch}
           />
-          <select name="sortBy" value={sortTerm} onChange={handleSortChange}>
+          <select name="sortBy" onChange={debounceSort}>
             <option value="">Sort by</option>
             <option value="relevancy">Relevancy</option>
             <option value="popularity">Popularity</option>
