@@ -23,7 +23,7 @@ export async function loader({ request }) {
   const sortParam = sortBy ? `&sortBy=${sortBy}` : ``;
 
   const dataUrl =
-    `https://newsapi.org/v2/everything?apiKey=1a877f6de7b9490082dfedd79812c371&page=${
+    `https://newsapi.org/v2/everything?apiKey=21f9133ff93f41d58ef769752661963d&page=${
       page ?? 1
     }&pageSize=6&qInTitle=${search}` + sortParam;
 
@@ -62,13 +62,6 @@ export default function MainPage() {
       return prevParams;
     });
   }, [currentPage]);
-
-  function prevPage() {
-    setCurrentPage(currentPage - 1);
-  }
-  function nextPage() {
-    setCurrentPage(currentPage + 1);
-  }
 
   // Search functionality
 
@@ -151,8 +144,7 @@ export default function MainPage() {
         <Paginate
           totalPages={totalPages}
           currentPage={currentPage}
-          prevPage={prevPage}
-          nextPage={nextPage}
+          setCurrentPage={setCurrentPage}
         />
       </div>
     </main>

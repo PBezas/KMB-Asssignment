@@ -1,32 +1,20 @@
-import { SlArrowLeft } from "react-icons/sl";
-import { SlArrowRight } from "react-icons/sl";
+import Pagination from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
-export default function Paginate({
-  currentPage,
-  totalPages,
-  prevPage,
-  nextPage,
-}) {
+export default function Paginate({ currentPage, totalPages, setCurrentPage }) {
+  function handleChange(e, value) {
+    setCurrentPage(value);
+  }
   return (
-    <>
-      <button
-        className="arrowBtn"
-        onClick={prevPage}
-        disabled={currentPage === 1}
-      >
-        <SlArrowLeft />
-      </button>
-      <div className="pagination">
-        <p className="pageNumber">{currentPage}</p>
-        of <span>{totalPages}</span>
-      </div>
-      <button
-        className="arrowBtn"
-        onClick={nextPage}
-        disabled={currentPage >= totalPages}
-      >
-        <SlArrowRight />
-      </button>
-    </>
+    <Stack spacing={2} className="pagination">
+      <Pagination
+        count={totalPages}
+       page={currentPage} 
+        hidePrevButton={currentPage === 1}
+        hideNextButton={currentPage >= totalPages}
+        onChange={handleChange}
+        color="primary"
+      />
+    </Stack>
   );
 }
