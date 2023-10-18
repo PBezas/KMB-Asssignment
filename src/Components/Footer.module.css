@@ -1,15 +1,22 @@
 .appFooter {
+  border-top: 2px solid rgba(119, 136, 153, 0.2);
+  width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  color: lightslategray;
-  border-top: 2px solid rgba(119, 136, 153, 0.2);
-  font-size: 0.6rem;
-  width: 100%;
 }
 
-.appFooter > ul {
+.footerContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  color: lightslategray;
+  font-size: 0.6rem;
+  width: 80%;
+}
+
+.footerContent > ul {
   list-style-type: none;
   display: flex;
   justify-content: space-between;
@@ -17,18 +24,21 @@
   padding: 0;
 }
 
-.appFooter > ul a {
+.footerContent > ul > li:first-child {
+  margin: 0;
+}
+
+.footerContent > ul a {
   text-decoration: none;
   color: lightslategray;
 }
 
-.appFooter > ul a:hover {
+.footerContent > ul a:hover {
   color: darkgrey;
 }
 
 @media (min-width: 420px) {
-  .appFooter {
+  .footerContent {
     flex-direction: row;
-    justify-content: space-around;
   }
 }

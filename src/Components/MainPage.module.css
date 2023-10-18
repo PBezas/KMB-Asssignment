@@ -39,11 +39,15 @@
 
 .articleContainer {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
   gap: 1rem;
+}
+
+.appPagination {
+  margin-bottom: 1rem;
 }
 
 @media (min-width: 420px) {
@@ -61,5 +65,9 @@
 
   .formField {
     width: 12.5rem;
+  }
+
+  .appPagination {
+    align-self: flex-start;
   }
 }

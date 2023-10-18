@@ -148,7 +148,7 @@ export default function MainPage() {
           <CircularProgress />
         </Box>
       )}
-      <div>
+      <div className={styles.appPagination}>
         <Paginate
           totalPages={totalPages}
           currentPage={currentPage}
