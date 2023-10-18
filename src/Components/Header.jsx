@@ -1,11 +1,12 @@
 import styles from "./Header.module.css";
 import { users } from "../data/users.jsx";
 import { useState } from "react";
-import { MdKeyboardArrowDown } from "react-icons/md";
 
 import Button from "@mui/material/Button";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import MenuIcon from "@mui/icons-material/Menu";
 
 function getInitials(name) {
   const [firstName, lastName] = name.split(" ");
@@ -38,8 +39,20 @@ export default function Header() {
                 {getInitials(user.name)}
               </span>
               <span> Hi {user.name.split(" ")[0]}</span>
-              <Button onClick={handleClick} sx={{ color: "white" }}>
-                <MdKeyboardArrowDown />
+              <Button
+                onClick={handleClick}
+                sx={{ color: "white" }}
+                className={styles.menuArrow}
+              >
+                {" "}
+                <KeyboardArrowDownIcon fontSize="small" />
+              </Button>
+              <Button
+                onClick={handleClick}
+                sx={{ color: "white" }}
+                className={styles.menuBurger}
+              >
+                <MenuIcon />
               </Button>
               <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
                 <MenuItem onClick={handleClose}>Settings</MenuItem>

@@ -8,7 +8,8 @@
   height: 15rem;
 }
 
-.greetMsgContainer,
+.greetMsgContainer > span,
+.greetMsgContainer > .menuArrow,
 .userInitials {
   display: none;
 }
@@ -43,6 +44,14 @@
 }
 
 @media (min-width: 420px) {
+  .greetMsgContainer > .menuBurger {
+    display: none;
+  }
+
+  .greetMsgContainer > .menuArrow {
+    display: inline-flex;
+  }
+
   .headerLoginBar {
     display: flex;
     justify-content: flex-end;
@@ -51,6 +60,10 @@
     padding: 0.5rem;
     color: lightgray;
     height: 3rem;
+  }
+
+  .greetMsgContainer > span {
+    display: inline-flex;
   }
 
   .greetMsgContainer {
