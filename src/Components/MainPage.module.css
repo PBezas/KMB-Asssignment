@@ -1,25 +1,53 @@
 .main {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 2rem;
-    flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  flex-grow: 1;
+}
+
+.filters {
+  align-self: center;
+}
+
+.filters form {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.formField {
+  width: 10rem;
+  height: 30px;
+  border-radius: 3px;
+  border: 1px solid rgb(118, 118, 118);
+  color: rgb(88, 88, 88);
+  box-shadow: inset 0px 0px 1px 0px rgba(0, 0, 0, 0.293);
+  padding-left: 6px;
+}
+
+.formField:not(:first-child) {
+  background-color: #eaeaea;
+}
+
+.articleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+@media (min-width: 420px) {
+  .filters {
+    align-self: flex-end;
   }
-  
-  .filters form {
-    margin-bottom: 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 2rem;
+
+  .formField {
+    width: 12.5rem;
   }
-  
-  .articleContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-  }
+}

@@ -111,10 +111,16 @@ export default function MainPage() {
           <input
             type="search"
             name="search"
-            placeholder="search articles"
+            placeholder="Search articles"
             onChange={debounceSearch}
+            className={styles.formField}
           />
-          <select name="sortBy" onChange={debounceSort}>
+
+          <select
+            name="sortBy"
+            onChange={debounceSort}
+            className={styles.formField}
+          >
             <option value="">Sort by</option>
             <option value="relevancy">Relevancy</option>
             <option value="popularity">Popularity</option>
