@@ -7,6 +7,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
+import { width } from "@mui/system";
 
 function getInitials(name) {
   const [firstName, lastName] = name.split(" ");
@@ -34,30 +35,32 @@ export default function Header() {
           }}
         >
           <div className={styles.headerLoginBar}>
-            <div className={styles.greetMsgContainer}>
-              <span className={styles.userInitials}>
-                {getInitials(user.name)}
-              </span>
-              <span> Hi {user.name.split(" ")[0]}</span>
-              <Button
-                onClick={handleClick}
-                sx={{ color: "white" }}
-                className={styles.menuArrow}
-              >
-                {" "}
-                <KeyboardArrowDownIcon fontSize="small" />
-              </Button>
-              <Button
-                onClick={handleClick}
-                sx={{ color: "white" }}
-                className={styles.menuBurger}
-              >
-                <MenuIcon />
-              </Button>
-              <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-                <MenuItem onClick={handleClose}>Settings</MenuItem>
-                <MenuItem onClick={handleClose}>Logout</MenuItem>
-              </Menu>
+            <div className={styles.loginContent}>
+              <div className={styles.greetMsgContainer}>
+                <span className={styles.userInitials}>
+                  {getInitials(user.name)}
+                </span>
+                <span> Hi {user.name.split(" ")[0]}</span>
+                <Button
+                  onClick={handleClick}
+                  sx={{ color: "white" }}
+                  className={styles.menuArrow}
+                >
+                  {" "}
+                  <KeyboardArrowDownIcon fontSize="small" />
+                </Button>
+                <Button
+                  onClick={handleClick}
+                  sx={{ color: "white" }}
+                  className={styles.menuBurger}
+                >
+                  <MenuIcon />
+                </Button>
+                <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                  <MenuItem onClick={handleClose}>Settings</MenuItem>
+                  <MenuItem onClick={handleClose}>Logout</MenuItem>
+                </Menu>
+              </div>
             </div>
           </div>
           <div className={styles.userInfo}>

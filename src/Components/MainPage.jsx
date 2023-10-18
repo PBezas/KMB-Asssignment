@@ -25,7 +25,7 @@ export async function loader({ request }) {
   const sortParam = sortBy ? `&sortBy=${sortBy}` : ``;
 
   const dataUrl =
-    `https://newsapi.org/v2/everything?apiKey=21f9133ff93f41d58ef769752661963d&page=${
+    `https://newsapi.org/v2/everything?apiKey=1a877f6de7b9490082dfedd79812c371&page=${
       page ?? 1
     }&pageSize=6&qInTitle=${search}` + sortParam;
 

@@ -1,3 +1,7 @@
+.appHeader {
+  align-self: stretch;
+}
+
 .headerContainer {
   display: flex;
   flex-direction: column;
@@ -52,14 +56,25 @@
     display: inline-flex;
   }
 
+  .headerContainer {
+    align-items: center;
+  }
+
   .headerLoginBar {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
     background-color: #254a75;
-    padding: 0.5rem;
-    color: lightgray;
+    padding: 0.5rem 0;
     height: 3rem;
+    align-self: stretch;
+  }
+
+  .loginContent {
+    display: flex;
+    color: lightgray;
+    width: 85%;
+    justify-content: flex-end;
   }
 
   .greetMsgContainer > span {
@@ -84,15 +99,11 @@
     font-size: initial;
   }
 
-  .headerLoginBar {
-    padding: 0.5rem 5rem;
-  }
-
   .userInfo {
     flex-direction: row;
     justify-content: flex-start;
-    padding: 2rem 5rem;
     height: 170px;
+    width: 80%;
   }
 
   .userInfoContent {
