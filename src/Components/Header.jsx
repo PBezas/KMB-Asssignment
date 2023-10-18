@@ -24,7 +24,14 @@ export default function Header() {
   return (
     <header className={styles.appHeader}>
       {users.map((user) => (
-        <div key={user.id} className={styles.headerContainer}>
+        <div
+          key={user.id}
+          className={styles.headerContainer}
+          style={{
+            backgroundImage: `url(${user.backImg})`,
+            backgroundRepeat: "no-repeat",
+          }}
+        >
           <div className={styles.headerLoginBar}>
             <div className={styles.greetMsgContainer}>
               <span className={styles.userInitials}>
@@ -40,19 +47,15 @@ export default function Header() {
               </Menu>
             </div>
           </div>
-          <div
-            className={styles.userInfo}
-            style={{
-              backgroundImage: `url(${user.backImg})`,
-              backgroundRepeat: "no-repeat",
-            }}
-          >
-            <img
-              src={user.profImg}
-              alt={user.name}
-              className={styles.profileImg}
-            />
-            <h2>{user.name}</h2>
+          <div className={styles.userInfo}>
+            <div className={styles.userInfoContent}>
+              <img
+                src={user.profImg}
+                alt={user.name}
+                className={styles.profileImg}
+              />
+              <h2>{user.name}</h2>
+            </div>
           </div>
         </div>
       ))}
