@@ -10,10 +10,13 @@
 
 .filters {
   align-self: center;
+  border-bottom: 2px solid rgba(119, 136, 153, 0.2);
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .filters form {
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,11 +39,11 @@
 
 .articleContainer {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 1rem;
 }
 
 @media (min-width: 420px) {
@@ -50,6 +53,10 @@
 
   .filters {
     align-self: flex-end;
+  }
+
+  .filters form {
+    justify-content: flex-end;
   }
 
   .formField {
