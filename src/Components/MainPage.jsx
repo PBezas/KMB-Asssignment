@@ -1,6 +1,6 @@
 import styles from "./MainPage.module.css";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useMemo } from "react";
 import {
   useLoaderData,
   useNavigation,
@@ -83,7 +83,7 @@ export default function MainPage() {
       });
     }
   }
-  const debounceSearch = debounce(handleSearch, 300);
+  const debounceSearch = useMemo(() => debounce(handleSearch, 300));
 
   // Sort functionality
 
