@@ -2,9 +2,15 @@
   box-sizing: border-box;
 }
 
+body {
+  margin: 0;
+  background-color: #F6F6F6;
+}
+
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }

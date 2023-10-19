@@ -43,7 +43,8 @@
   align-items: center;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.9rem;
+  width: 100%;
 }
 
 .appPagination {
@@ -52,7 +53,7 @@
 
 @media (min-width: 420px) {
   .main {
-    width: 80%;
+    width: 85%;
   }
 
   .filters {

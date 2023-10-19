@@ -73,7 +73,7 @@
   .loginContent {
     display: flex;
     color: lightgray;
-    width: 80%;
+    width: 90%;
     justify-content: flex-end;
   }
 
@@ -103,7 +103,7 @@
     flex-direction: row;
     justify-content: flex-start;
     height: 170px;
-    width: 80%;
+    width: 85%;
   }
 
   .userInfoContent {
