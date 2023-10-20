@@ -7,7 +7,6 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MenuIcon from "@mui/icons-material/Menu";
-import { width } from "@mui/system";
 
 function getInitials(name) {
   const [firstName, lastName] = name.split(" ");
@@ -43,7 +42,7 @@ export default function Header() {
                 <span> Hi {user.name.split(" ")[0]}</span>
                 <Button
                   onClick={handleClick}
-                  sx={{ color: "white" }}
+                  sx={{ color: "white", p: 0, minWidth: 0, w: "2px" }}
                   className={styles.menuArrow}
                 >
                   {" "}
@@ -51,12 +50,21 @@ export default function Header() {
                 </Button>
                 <Button
                   onClick={handleClick}
-                  sx={{ color: "white" }}
+                  sx={{ color: "white", p: 0, minWidth: 0, w: "2px" }}
                   className={styles.menuBurger}
                 >
                   <MenuIcon />
                 </Button>
-                <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
+                <Menu
+                  anchorEl={anchorEl}
+                  open={open}
+                  sx={{
+                    left: "-60px",
+                    top: "14px",
+                    width: "300px",
+                  }}
+                  onClose={handleClose}
+                >
                   <MenuItem onClick={handleClose}>Settings</MenuItem>
                   <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
