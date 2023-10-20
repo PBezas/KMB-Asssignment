@@ -40,10 +40,7 @@ export default function MainPage() {
   const data = useLoaderData();
   const articles = data.articles;
   const totalArticles = data.totalResults;
-  const [currentPage, setCurrentPage] = useState(1);
-  const [articlesPerPage] = useState(6);
   const [searchParams, setSearchParams] = useSearchParams();
-  const totalPages = Math.ceil(totalArticles / articlesPerPage);
   const query = searchParams.get("qInTitle");
   const [isLoading, setIsLoading] = useState(false);
   const { state } = useNavigation();
@@ -57,15 +54,6 @@ export default function MainPage() {
       searchRef.current = false;
     }
   }, [state]);
-
-  // Pagination functionality
-
-  useEffect(() => {
-    setSearchParams((prevParams) => {
-      prevParams.set("page", currentPage);
-      return prevParams;
-    });
-  }, [currentPage]);
 
   // Search functionality
 
@@ -124,7 +112,7 @@ export default function MainPage() {
           </div>
           <div className={styles.formFieldWrapper}>
             <span>
-              <UnfoldMoreIcon className={styles.upAndDownArrow}/>
+              <UnfoldMoreIcon className={styles.upAndDownArrow} />
             </span>
             <select
               name="sortBy"
@@ -161,9 +149,8 @@ export default function MainPage() {
       )}
       <div className={styles.appPagination}>
         <Paginate
-          totalPages={totalPages}
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
+          totalArticles={totalArticles}
+          setSearchParams={setSearchParams}
         />
       </div>
     </main>
