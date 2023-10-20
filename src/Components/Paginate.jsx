@@ -20,15 +20,17 @@ export default function Paginate({ setSearchParams, totalArticles }) {
     setCurrentPage(value);
   }
   return (
-    <Stack spacing={2} className={styles.pagination}>
-      <Pagination
-        count={totalPages}
-        page={currentPage}
-        hidePrevButton={currentPage === 1}
-        hideNextButton={currentPage >= totalPages}
-        onChange={handleChange}
-        color="primary"
-      />
-    </Stack>
+    <div className={styles.appPagination}>
+      <Stack spacing={2} className={styles.pagination}>
+        <Pagination
+          count={totalPages}
+          page={currentPage}
+          hidePrevButton={currentPage === 1}
+          hideNextButton={currentPage >= totalPages}
+          onChange={handleChange}
+          color="primary"
+        />
+      </Stack>
+    </div>
   );
 }

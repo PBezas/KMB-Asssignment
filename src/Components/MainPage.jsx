@@ -147,12 +147,10 @@ export default function MainPage() {
           <CircularProgress />
         </Box>
       )}
-      <div className={styles.appPagination}>
-        <Paginate
-          totalArticles={totalArticles}
-          setSearchParams={setSearchParams}
-        />
-      </div>
+      <Paginate
+        totalArticles={totalArticles}
+        setSearchParams={setSearchParams}
+      />
     </main>
   );
 }

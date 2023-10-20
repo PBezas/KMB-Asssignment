@@ -1,7 +1,17 @@
+.appPagination {
+  margin-bottom: 1rem;
+}
+
 .pagination {
   margin-top: 2rem;
 }
 
 .pagination li:first-child {
   margin: 0;
+}
+
+@media (min-width: 420px) {
+  .appPagination {
+    align-self: flex-start;
+  }
 }

@@ -73,9 +73,6 @@
   width: 100%;
 }
 
-.appPagination {
-  margin-bottom: 1rem;
-}
 
 @media (min-width: 420px) {
   .main {
@@ -93,9 +90,5 @@
 
   .formField {
     width: 15rem;
-  }
-
-  .appPagination {
-    align-self: flex-start;
   }
 }
