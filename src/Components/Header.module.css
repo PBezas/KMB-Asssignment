@@ -47,12 +47,6 @@
   color: white;
 }
 
-@media (max-width: 420px) {
-  .headerLoginBar .loginContent .greetMsgContainer{
-    display: none;
-  }
-}
-
 @media (min-width: 420px) {
   .greetMsgContainer > .menuBurger {
     display: none;

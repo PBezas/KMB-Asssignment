@@ -16,6 +16,8 @@ import debounce from "lodash.debounce";
 
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
+import SearchIcon from "@mui/icons-material/Search";
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
 
 export async function loader({ request }) {
   const url = new URL(request.url);
@@ -108,24 +110,33 @@ export default function MainPage() {
     <main className={styles.main}>
       <div className={styles.filters}>
         <form onSubmit={(e) => e.preventDefault()}>
-          <input
-            type="search"
-            name="search"
-            placeholder="Search articles"
-            onChange={debounceSearch}
-            className={styles.formField}
-          />
-
-          <select
-            name="sortBy"
-            onChange={debounceSort}
-            className={styles.formField}
-          >
-            <option value="">Sort by</option>
-            <option value="relevancy">Relevancy</option>
-            <option value="popularity">Popularity</option>
-            <option value="publishedAt">Published at</option>
-          </select>
+          <div className={styles.formFieldWrapper}>
+            <span className={styles.searchIcon}>
+              <SearchIcon />
+            </span>
+            <input
+              type="search"
+              name="search"
+              placeholder="Search articles"
+              onChange={debounceSearch}
+              className={styles.formField}
+            />
+          </div>
+          <div className={styles.formFieldWrapper}>
+            <span>
+              <UnfoldMoreIcon className={styles.upAndDownArrow}/>
+            </span>
+            <select
+              name="sortBy"
+              onChange={debounceSort}
+              className={styles.formField}
+            >
+              <option value="">Sort by</option>
+              <option value="relevancy">Relevancy</option>
+              <option value="popularity">Popularity</option>
+              <option value="publishedAt">Published at</option>
+            </select>
+          </div>
         </form>
       </div>
       {!isLoading ? (

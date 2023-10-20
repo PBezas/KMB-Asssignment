@@ -18,23 +18,49 @@
 .filters form {
   margin-bottom: 0.5rem;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  gap: 1rem;
+  gap: 0.3rem;
+}
+
+.formFieldWrapper {
+  position: relative;
+  color: rgb(88, 88, 88);
+}
+
+.searchIcon {
+  position: absolute;
+  top: 23%;
+  margin-left: 10px;
 }
 
 .formField {
-  width: 10rem;
-  height: 30px;
+  color: #707070;
+  width: 9rem;
+  height: 40px;
   border-radius: 3px;
   border: 1px solid rgb(118, 118, 118);
-  color: rgb(88, 88, 88);
   box-shadow: inset 0px 0px 1px 0px rgba(0, 0, 0, 0.293);
-  padding-left: 6px;
 }
 
-.formField:not(:first-child) {
-  background-color: #eaeaea;
+.formFieldWrapper input {
+  padding-left: 40px;
+  background-color: white;
+}
+
+.formFieldWrapper select {
+  padding-left: 5px;
+  background-color: rgba(226, 226, 226, 1);
+  cursor: pointer;
+}
+
+.upAndDownArrow {
+  color: black;
+  position: absolute;
+  top: 20%;
+  right: 2px;
+  background-color: rgba(226, 226, 226, 1);
+  z-index: 1;
 }
 
 .articleContainer {
@@ -62,10 +88,11 @@
 
   .filters form {
     justify-content: flex-end;
+    gap: 1rem;
   }
 
   .formField {
-    width: 12.5rem;
+    width: 15rem;
   }
 
   .appPagination {
